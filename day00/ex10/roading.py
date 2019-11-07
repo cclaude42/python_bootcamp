@@ -7,15 +7,21 @@ def ft_progress(list):
     mval = max(list)
     length = len(str(max(list)))
     eta = 0
-    barsize = 40
+    barsize = 10000
     for i in list:
         per = i/mval*100
         bar = int(i/mval*barsize)
         t = time.time() - start
         if not per == 0:
             eta = t/per*100
+        if per < 40:
+            color = "\033[31m"
+        elif  per < 75:
+            color = "\033[33m"
+        else:
+            color = "\033[32m"
         sys.stdout.write('\r')
-        sys.stdout.write("ETA: %.2fs [%3d%%] [%-*.*s] %*d/%d | elapsed time %.2fs" % (eta, per, barsize, barsize, '='*bar+'>', length, i, mval, t))
+        sys.stdout.write("ETA: %.2fs [%3d%%] |%s%-*.*s%s| %*d/%d | elapsed time %.2fs" % (eta, per, color, barsize, barsize, "█"*bar, "\033[0m", length, i, mval, t))
         sys.stdout.flush()
         yield i
 
