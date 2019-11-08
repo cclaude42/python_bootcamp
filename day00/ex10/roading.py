@@ -16,7 +16,7 @@ def ft_progress(list):
             eta = t/per*100
         if per < 40:
             color = "\033[31m"
-        elif  per < 75:
+        elif per < 75:
             color = "\033[33m"
         else:
             color = "\033[32m"

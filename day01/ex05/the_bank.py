@@ -2,6 +2,7 @@
 
 class Account(object):
     ID_COUNT = 1
+
     def __init__(self, name, **kwargs):
         self.id = self.ID_COUNT
         self.name = name
@@ -12,6 +13,7 @@ class Account(object):
 
     def transfer(self, amount):
         self.value += amount
+
 
 class Bank(object):
 
@@ -68,40 +70,51 @@ class Bank(object):
 
     def fix_account(self, account):
         corrupted = 0
+        zip_check = 0
+        addr_check = 0
         for elem in self.account:
             if account in elem.__dict__.values():
                 corrupted = elem
         if corrupted == 0:
             print("Couldn't find account.")
             return (False)
-        if 'name' not in corrupted.__dict__.keys():
+        keys = list(corrupted.__dict__.keys())
+        if 'name' not in keys:
             corrupted.__dict__['name'] = 'Restored account'
-        if 'id' not in corrupted.__dict__.keys():
+        if 'id' not in keys:
             corrupted.__dict__['id'] = Account.ID_COUNT
             Account.ID_COUNT += 1
-        if 'value' not in corrupted.__dict__.keys():
-            corrupted.__dict__['name'] = 'Restored account'
-        # zip_check = 0
-        # addr_check = 0
-        # for str in corrupted.__dict__.keys():
-        #     if str.startswith('zip'):
-        #         zip_check = 1
-        #     if str.startswith('addr'):
-        #         addr_check = 1
-        #     if str.startswith('b'):
-        #         return (1)
-        # if zip_check == 0 or addr_check == 0:
-        #     return (1)
-        # if len(corrupted.__dict__) % 2 == 0:
-        #     return (1)
-        return (True)
-# """
-# fix the corrupted account
-# @account: int(id) or str(name) of the account
-# @return True if success, False if an error occured
-# """
+        if 'value' not in keys:
+            corrupted.__dict__['value'] = 0
+        for str in keys:
+            if str.startswith('zip'):
+                zip_check = 1
+            if str.startswith('addr'):
+                addr_check = 1
+            if str.startswith('b'):
+                corrupted.__dict__.pop(str)
+        if zip_check == 0:
+            corrupted.__dict__['zip'] = '00000'
+        if addr_check == 0:
+            corrupted.__dict__['addr'] = '42 rue des Corruptions'
+        if len(corrupted.__dict__) % 2 == 0:
+            for str in corrupted.__dict__.keys():
+                if str == 'name' or str == 'id' or str == 'value':
+                    pass
+                elif str.startswith('zip') or str.startswith('addr'):
+                    pass
+                else:
+                    corrupted.__dict__.pop(str)
+                    break
+        if self.corrupted(corrupted):
+            print("Couldn't fix account.")
+            return (False)
+        else:
+            print("Successfully fixed account !")
+            return (True)
 
-acc1 = Account("First", value=20, zip='75015', addr='11 rue Bite')
+
+acc1 = Account("First", bob=6, todd=4)
 acc2 = Account("Second", zip='TAZ42', addr='69 rue des Rosiers')
 bnk = Bank()
 lst = acc1.__dir__()
@@ -109,10 +122,9 @@ bnk.add(acc1)
 bnk.add(acc2)
 acc1.__dict__.pop('id')
 print(acc1.__dict__)
-# print(acc2.__dict__)
+print(acc2.__dict__)
 bnk.fix_account("First")
 print(acc1.__dict__)
-print(Account.ID_COUNT)
-# print(acc2.__dict__)
-# print(bnk.__dict__)
-# print(len(lst))
+print(acc2.__dict__)
+print(bnk.__dict__)
+print(len(lst))

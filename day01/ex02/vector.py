@@ -79,7 +79,7 @@ class Vector:
 
     def __str__(self):
         txt = ("Vector values : " + str(self.values)
-        + "\nNumber of values : " + str(self.length))
+               + "\nNumber of values : " + str(self.length))
         return txt
 
     def __repr__(self):
