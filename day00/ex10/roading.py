@@ -7,7 +7,7 @@ def ft_progress(list):
     mval = max(list)
     length = len(str(max(list)))
     eta = 0
-    barsize = 10000
+    barsize = 40
     for i in list:
         per = i/mval*100
         bar = int(i/mval*barsize)
