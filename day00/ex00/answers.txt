@@ -1,0 +1,11 @@
+# Commands that show packages and versions :
+pip list
+
+# Command to show packages metadata :
+pip show {PACKAGE}
+
+# Show for packages with {WORD} in name :
+pip search {WORD}
+
+# Freeze packages in requirements.txt :
+pip freeze > requirements.txt
