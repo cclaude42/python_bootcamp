@@ -3,13 +3,15 @@ import string
 
 
 def text_analyzer(*args):
-    """Counts the number of upper, lower, punctuation and space characters.
-    """
+    """Counts the number of upper, lower, punctuation and space characters."""
     i = 0
     upper = 0
     lower = 0
     punct = 0
     space = 0
+    if len(args) > 1:
+        print("ERROR")
+        return
     if (len(args) == 0):
         print("What is the text to analyse?")
         print(">> ", end="")

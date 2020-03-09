@@ -17,3 +17,5 @@ while (i > 1):
         print(' ', end='')
     else:
         print('')
+
+# print(''.join([i.upper() if i.islower() else i.lower() for i in ''.join(sys.argv[1:])][::-1]))
