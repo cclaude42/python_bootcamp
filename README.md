@@ -48,5 +48,6 @@ function set_conda {
 And then run :
 ```
 source ~/.zshrc
+set_conda
 conda install -y "jupyter" "numpy" "pandas"
 ```
