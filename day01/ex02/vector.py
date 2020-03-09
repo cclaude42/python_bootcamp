@@ -57,12 +57,11 @@ class Vector:
             print("Error : can't divide by 0")
         else:
             new = Vector(self.values)
-            for i in range(self.length):
-                new.values[i] = self.values[i] / oper
-                return (new)
+            return ([i / oper for i in self.values])
 
     def __rtruediv__(self, oper):
-        return (self.__truediv__(oper))
+        new = Vector(self.values)
+        return ([oper / i for i in self.values])
 
     def __mul__(self, oper):
         new = Vector(self.values)
@@ -86,8 +85,12 @@ class Vector:
         txt = (str(self.values) + " : " + str(self.length))
         return txt
 
+### Testing
 
+# Create Vector [10, 11, 12, 13, 14]
 v1 = Vector((10, 15))
 print(v1)
-v3 = v1 / 4
+
+# Create new Vector with operation
+v3 = 2 / v1
 print(repr(v3))

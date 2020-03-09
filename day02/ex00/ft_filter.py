@@ -1,6 +1,6 @@
 
 
-def fun(variable):
+def func(variable):
     letters = ['a', 'e', 'i', 'o', 'u']
     if (variable in letters):
         return True
@@ -18,7 +18,7 @@ def ft_filter(func, list):
 
 sequence = ['g', 'e', 'e', 'j', 'k', 's', 'p', 'r']
 
-filtered = ft_filter(fun, 'hello')
+filtered = ft_filter(func, 'hello')
 
 print('The filtered letters are:')
 for s in filtered:

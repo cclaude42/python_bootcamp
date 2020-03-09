@@ -117,6 +117,7 @@ class Bank(object):
 acc1 = Account("First", bob=6, todd=4)
 acc2 = Account("Second", zip='TAZ42', addr='69 rue des Rosiers')
 bnk = Bank()
+print(bnk.__dict__)
 lst = acc1.__dir__()
 bnk.add(acc1)
 bnk.add(acc2)
