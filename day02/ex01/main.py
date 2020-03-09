@@ -14,10 +14,10 @@ def what_are_the_vars(*args, **kwargs):
     return (obj)
 
 
+
 class ObjectC(object):
     def __init__(self):
         pass
-
 
 def doom_printer(obj):
     if obj is None:
