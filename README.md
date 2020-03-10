@@ -50,3 +50,10 @@ And then run :
 source ~/.zshrc
 set_conda
 ```
+
+If install fails or interrupts, running the function again usually does NOT work, because conda doesn't let you overwrite your installation. You'll have to install it elsewhere.
+
+In that case :
+- Change the INSTALL_PATH in your ~/.zshrc, to ``"/goinfre/your_login"`` for example
+- If there's an ``export PATH=/goinfre/miniconda3/bin:$PATH`` line at the bottom of your ~/.zshrc, remove it.
+- Rerun ``source ~/.zshrc`` and ``set_conda``.
