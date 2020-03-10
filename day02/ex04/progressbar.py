@@ -2,7 +2,7 @@ import time
 import sys
 
 
-def ft_progress(list):
+def progressbar(list):
     start = time.time()
     mval = max(list)
     length = len(str(max(list)))
@@ -18,12 +18,3 @@ def ft_progress(list):
         sys.stdout.write("ETA: %.2fs [%3d%%] [%-*.*s] %*d/%d | elapsed time %.2fs" % (eta, per, barsize, barsize, '='*bar+'>', length, i, mval, t))
         sys.stdout.flush()
         yield i
-
-if __name__ == "__main__":
-    listy = range(1001)
-    ret = 0
-    for elem in ft_progress(listy):
-        ret += (elem + 3) % 5
-        time.sleep(0.01)
-    print()
-    print(ret)
