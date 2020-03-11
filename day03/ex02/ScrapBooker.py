@@ -15,7 +15,7 @@ class ScrapBooker():
 	def thin(self, array, n, axis):
 		if axis:
 			for i in range(n-1, len(array), n-1):
-				array = np.concatenate((array[:i,:], array[i+1:,:]))
+				array = np.concatenate((array[:i,:], array[i+1:,:]), axis=0)
 			return array
 		else:
 			for i in range(n-1, len(array[0]), n-1):
@@ -23,17 +23,28 @@ class ScrapBooker():
 			return array
 
 	def juxtapose(self, array, n, axis):
-		pass
+		copy = array
+		for i in range(n-1):
+			array = np.concatenate((array, copy), axis=axis)
+		return array
+
 
 	def mosaic(self, array, dimensions):
-		pass
+		array = ScrapBooker.juxtapose(self, array, dimensions[0], 0)
+		return ScrapBooker.juxtapose(self, array, dimensions[1], 1)
 
 
 
 if __name__ == "__main__":
 	scb = ScrapBooker()
-	arr = np.random.choice([' ', 'X'], size=(5, 5))
+	arr = np.eye(2)
 	print(arr)
-	print()
-	arr = scb.thin(arr, 2, 0)
+	print("\nMosaic (2x3) :\n")
+	arr = scb.mosaic(arr, (2,3))
+	print(arr)
+	print("\nCrop to 3x4 from index [1,1] :\n")
+	arr = scb.crop(arr, (3,4), (1,1))
+	print(arr)
+	print("\nThin every third line vertically (n=3, axis=0)\n")
+	arr = scb.thin(arr, 3, 0)
 	print(arr)
