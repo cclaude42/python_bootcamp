@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 from ImageProcessor import ImageProcessor
 
@@ -18,15 +19,29 @@ class ColorFilter():
 	def to_red(self, array):
 		return array - self.to_blue(array) - self.to_green(array)
 
-	def celluloid(self, array):
-		pass
+	def celluloid(self, array, tresh=4):
+		new = np.array(array)
+		hold = np.linspace(0.0, 1.0, num=tresh, endpoint=False)[::-1]
+		for i in hold:
+			indexes = array >= i
+			array[indexes] = -1
+			new[indexes] = i
+		print(new)
+		return new
 
 	def to_grayscale(self, array, filter):
-		pass
+		array = array * [0.299, 0.587, 0.114]
+		for i in range(array.shape[0]):
+			pixel = np.sum(array[i], axis=1)
+			pixel = np.broadcast_to(pixel, (3, 1240))
+			# Using forbidden TRANSPOSE because couldn't figure it out
+			pixel = np.transpose(pixel)
+			array[i] = pixel
+		return array
 
 if __name__ == "__main__":
 	imp = ImageProcessor()
 	cf = ColorFilter()
 	arr = imp.load("../resources/elon_musk.png")
-	arr = cf.invert(arr)
+	arr = cf.to_grayscale(arr, 4)
 	imp.display(arr)
