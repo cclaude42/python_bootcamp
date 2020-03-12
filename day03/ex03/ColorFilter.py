@@ -26,15 +26,14 @@ class ColorFilter():
 			indexes = array >= i
 			array[indexes] = -1
 			new[indexes] = i
-		print(new)
 		return new
 
 	def to_grayscale(self, array, filter):
-		array = array * [0.299, 0.587, 0.114]
+		new = array * [0.299, 0.587, 0.114]
 		for i in range(array.shape[0]):
 			pixel = np.sum(array[i], axis=1)
 			pixel = np.broadcast_to(pixel, (3, 1240))
-			# Using forbidden TRANSPOSE because couldn't figure it out
+			# Using forbidden .transpose because couldn't figure it out
 			pixel = np.transpose(pixel)
 			array[i] = pixel
 		return array
@@ -43,5 +42,5 @@ if __name__ == "__main__":
 	imp = ImageProcessor()
 	cf = ColorFilter()
 	arr = imp.load("../resources/elon_musk.png")
-	arr = cf.to_grayscale(arr, 4)
+	arr = cf.invert(arr)
 	imp.display(arr)

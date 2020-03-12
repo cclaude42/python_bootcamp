@@ -12,7 +12,6 @@ class CsvReader():
 		except:
 			return None
 		lst = self.file_obj.read().split('\n')
-		# print(lst)
 		if self.hbool:
 			self.header = lst[0].split(self.sep)
 			lst = lst[1:]
