@@ -8,7 +8,7 @@ cffi==1.13.0
 chardet==3.0.4
 conda==4.8.2
 conda-package-handling==1.6.0
-cryptography==2.8
+cryptography==3.2
 decorator==4.4.1
 defusedxml==0.6.0
 entrypoints==0.3
