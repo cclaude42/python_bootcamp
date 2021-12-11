@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 t = (256, 234, 45, 4)
 
 if (isinstance(t, tuple) and len(t) == 0):

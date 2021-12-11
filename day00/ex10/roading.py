@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 import sys
 
@@ -30,6 +31,6 @@ if __name__ == "__main__":
     ret = 0
     for elem in ft_progress(listy):
         ret += (elem + 3) % 5
-        time.sleep(0.01)
+        time.sleep(0.005)
     print()
     print(ret)

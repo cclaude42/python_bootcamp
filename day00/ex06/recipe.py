@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 
 
@@ -29,7 +30,7 @@ def add_recipe(name, ingredients, meal, time):
 def print_all():
     for x in cookbook.keys():
         print_recipe(x)
-        print("")
+        print()
 
 
 cookbook = {'sandwich': (['ham', 'bread', 'cheese', 'tomatoes'],
@@ -38,14 +39,14 @@ cookbook = {'sandwich': (['ham', 'bread', 'cheese', 'tomatoes'],
             'salad': (['avocado', 'arugula', 'tomatoes', 'spinach'],
                       'lunch', '15')}
 
-print("Please select an option by typing the corresponding number:")
-print("1: Add a recipe")
-print("2: Delete a recipe")
-print("3: Print a recipe")
-print("4: Print the cookbook")
-print("5: Quit")
 choice = 0
 while not choice == 5:
+    print("Please select an option by typing the corresponding number:")
+    print("1: Add a recipe")
+    print("2: Delete a recipe")
+    print("3: Print a recipe")
+    print("4: Print the cookbook")
+    print("5: Quit")
     print(">> ", end="")
     sys.stdout.flush()
     try:
@@ -71,6 +72,5 @@ while not choice == 5:
     elif choice == 5:
         print("Cookbook closed.")
     else:
-        print("This option does not exist, "
-              "please type the corresponding number.")
-        print("To exit, enter 5.")
+        print("This option does not exist.")
+    print()
