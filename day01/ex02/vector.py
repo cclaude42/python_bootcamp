@@ -1,31 +1,69 @@
 import sys
 
+def isFloatList(lst):
+    if not isinstance(lst, list) or len(lst) == 0:
+        return False
+    for elem in lst:
+        if not isinstance(elem, int) and not isinstance(elem, float):
+            return False
+    return True
+
+def isListList(lst):
+    if not isinstance(lst, list) or len(lst) == 0:
+        return False
+    for elem in lst:
+        if not isFloatList(elem):
+            return False
+    return True
+
+def isRectangular(lst):
+    if not isListList(lst):
+        return False
+    size = lst[0]
+    for elem in lst:
+        if len(elem) != size:
+            return False
+    return True
+
+def isRange(tpl):
+    if not isinstance(tpl, tuple) or len(tpl) != 2:
+        return False
+    if isinstance(tpl[0], int) and isinstance(tpl[1], int) and tpl[0] < tpl[1]:
+        return True
+    return False
 
 class Vector:
 
     def __init__(self, values):
         self.values = []
-        self.length = 0
+        x = 0
+        y = 0
         if isinstance(values, list):
-            for f in values:
-                if isinstance(f, list) and len(f) == 1 and (isinstance(f[0], float) or isinstance(f[0], int)):
-                    self.values.append(float(f[0]))
-                    self.length += 1
-                elif isinstance(f, float) or isinstance(f, int):
-                    self.values.append(float(f))
-                    self.length += 1
-                else:
-                    raise ValueError("Invalid element in list: " + str(f))
+            if isFloatList(values):
+                x = 1
+                y = len(values)
+                for elem in values:
+                    self.values.append(elem)
+            elif isListList(values) and isRectangular(values):
+                x = len(values)
+                y = len(values[0])
+                for elem in values:
+                    self.values.append(elem)
+            else:
+                raise ValueError("Invalid list for Vector")
         elif isinstance(values, int):
-            for f in range(values):
-                self.values.append(float(f))
-            self.length = values
-        elif isinstance(values, tuple):
-            for f in range(values[0], values[1]):
-                self.values.append(float(f))
-                self.length += 1
+            x = values
+            y = 1
+            for n in range(values):
+                self.values.append(float(n))
+        elif isRange(values):
+            x = values[1] - values[0]
+            y = 1
+            for n in range(values[0], values[1]):
+                self.values.append(float(n))
         else:
             raise ValueError("Invalid values for Vector")
+        self.shape = (x, y)
 
     def __add__(self, oper):
         new = Vector(self.values)

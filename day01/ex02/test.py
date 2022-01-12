@@ -7,7 +7,7 @@ v5 = v1 + 4
 print(v5)
 print()
 
-v2 = Vector([[12.0], [24.0], [48.0]])
+v2 = Vector([[12.0, 4], [24.0, 6], [48.0, 8]])
 print(v2)
 v6 = v2 - 1
 print(v6)
