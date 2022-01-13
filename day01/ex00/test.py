@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+""" Book and recipe tests
+
+"""
 from recipe import Recipe
 from book import Book
 
@@ -8,7 +11,8 @@ tourte = Recipe("Tourte", 3, 20, listy, "", "lunch")
 
 # Create second Recipe :
 listy = ['Miel', 'Banane', 'Yaourt']
-smoothie = Recipe("Smoothie miel-banane", 3, 10, listy, "Un smoothie de yaourt au miel et à la banane", "dessert")
+smoothie = Recipe("Smoothie miel-banane", 3, 10, listy,
+        "Un smoothie de yaourt au miel et à la banane", "dessert")
 
 # Create Book :
 first_book = Book("First book")

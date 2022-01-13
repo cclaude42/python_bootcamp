@@ -1,9 +1,13 @@
+""" Book class
+
+"""
+import sys
 from datetime import datetime
 from recipe import Recipe
-import sys
 
 
 class Book:
+    """A class to represent a cookbook"""
 
     def __init__(self, name):
         self.name = name
@@ -21,33 +25,36 @@ class Book:
         return txt
 
     def get_recipe_by_name(self, name):
+        """Prints a recipe with the name specified and returns the instance"""
         if isinstance(name, str):
-            for list in self.recipes_list.values():
-                for elem in list:
+            for lst in self.recipes_list.values():
+                for elem in lst:
                     if elem.name == name:
                         print(elem)
-                        return(elem)
+                        return elem
             print("Couldn't find the recipe you were looking for.")
         else:
             print("Error : Name isn't a string.")
         sys.exit()
 
     def get_recipes_by_types(self, recipe_type):
+        """Get all recipe names for a given recipe_type"""
         if isinstance(recipe_type, str):
-            for type in self.recipes_list.keys():
-                if type == recipe_type:
-                    print("Recipes in " + recipe_type + " :")
-                    for elem in self.recipes_list[recipe_type]:
-                        print(elem.name)
-                    return
-            print("Error : Recipe type isn't starter, lunch or dessert.")
+            if recipe_type in self.recipes_list:
+                print("Recipes in " + recipe_type + " :")
+                for elem in self.recipes_list[recipe_type]:
+                    print(elem.name)
+                return
+            else:
+                print("Error : Recipe type isn't starter, lunch or dessert.")
         else:
             print("Error : Recipe type isn't a string.")
             sys.exit()
 
     def add_recipe(self, recipe):
+        """Add a recipe to the book and update last_update"""
         if isinstance(recipe, Recipe):
-            if recipe.recipe_type in self.recipes_list.keys():
+            if recipe.recipe_type in self.recipes_list:
                 self.recipes_list[recipe.recipe_type].append(recipe)
                 self.last_update = datetime.now()
             else:
