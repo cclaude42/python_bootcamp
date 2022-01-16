@@ -1,30 +1,35 @@
+#!/usr/bin/env python3
+""" Logger file
+
+"""
+import os
 import time
 from random import randint
 
 
 def log(func):
+    """A logger, wrapping the function call"""
     def wrapper(*args, **kwargs):
-        file = open("machine.log", "a+")
-        exec = time.time()
-        s = str(func).split()[1].split('.')[-1].replace('_', ' ').title()
-        file.write("(cclaude) Running: {:30}".format(s))
+        start = time.perf_counter()
         result = func(*args, **kwargs)
-        exec = time.time() - exec
-        if exec > 0.001:
-            file.write("[ exec-time = %.3f s ]\n" % exec)
-        else:
-            file.write("[ exec-time = %.3f ms ]\n" % (exec*1000))
-        file.close()
+        xtime = time.perf_counter() - start
+        with open("machine.log", mode="a+", encoding="utf-8") as file:
+            user = os.getenv('USER', "unknown")
+            name = func.__name__.replace('_', ' ').title()
+            if xtime > 0.001:
+                file.write(f"({user}) Running: {name:18} [ exec-time = {xtime:.3f} s  ]\n")
+            else:
+                file.write(f"({user}) Running: {name:18} [ exec-time = {xtime * 1000:.3f} ms ]\n")
         return result
     return wrapper
 
 
-class CoffeeMachine():
+class CoffeeMachine(): # pylint: disable=missing-class-docstring
 
     water_level = 100
 
     @log
-    def start_machine(self):
+    def start_machine(self): # pylint: disable=missing-function-docstring
         if self.water_level > 20:
             return True
         else:
@@ -32,11 +37,11 @@ class CoffeeMachine():
             return False
 
     @log
-    def boil_water(self):
+    def boil_water(self): # pylint: disable=missing-function-docstring
         return "boiling..."
 
     @log
-    def make_coffee(self):
+    def make_coffee(self): # pylint: disable=missing-function-docstring
         if self.start_machine():
             for _ in range(20):
                 time.sleep(0.1)
@@ -45,14 +50,10 @@ class CoffeeMachine():
             print("Coffee is ready!")
 
     @log
-    def add_water(self, water_level):
+    def add_water(self, water_level): # pylint: disable=missing-function-docstring
         time.sleep(randint(1, 5))
         self.water_level += water_level
         print("Blub blub blub...")
-
-# @log
-# def other(arg):
-# 	pass
 
 if __name__ == "__main__":
     machine = CoffeeMachine()
@@ -60,4 +61,3 @@ if __name__ == "__main__":
         machine.make_coffee()
     machine.make_coffee()
     machine.add_water(70)
-    # other(6)
