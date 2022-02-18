@@ -1,14 +1,21 @@
+"""A progress bar generator
+
+Part of the my_minipack package
+"""
 import time
 import sys
 
 
-def progressbar(list):
+def progressbar(lst):
+    """A progress bar to display progress.
+    To be used as a generator.
+    """
     start = time.time()
-    mval = max(list)
-    length = len(str(max(list)))
+    mval = max(lst)
+    length = len(str(max(lst)))
     eta = 0
     barsize = 40
-    for i in list:
+    for i in lst:
         per = i/mval*100
         bar = int(i/mval*barsize)
         t = time.time() - start

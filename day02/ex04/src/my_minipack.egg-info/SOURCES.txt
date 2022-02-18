@@ -1,0 +1,9 @@
+pyproject.toml
+setup.cfg
+src/my_minipack/__init__.py
+src/my_minipack/logger.py
+src/my_minipack/progressbar.py
+src/my_minipack.egg-info/PKG-INFO
+src/my_minipack.egg-info/SOURCES.txt
+src/my_minipack.egg-info/dependency_links.txt
+src/my_minipack.egg-info/top_level.txt
