@@ -9,7 +9,7 @@
 # ./tests/logger_test.py
 # ./tests/loading_test.py
 # deactivate
-# rm -rf tmp_env dist machine.log
+# rm -rf tmp_env dist machine.log src/my_minipack.egg-info
 #
 python -m pip install --upgrade build
 pip install --upgrade pip
