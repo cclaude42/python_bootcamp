@@ -44,7 +44,7 @@ prompt-toolkit==3.0.3
 ptyprocess==0.6.0
 pycosat==0.6.3
 pycparser==2.19
-Pygments==2.5.2
+Pygments==2.7.4
 pyOpenSSL==19.0.0
 pyrsistent==0.15.7
 PySocks==1.7.1
