@@ -19,7 +19,7 @@ class ColorFilter():
 	def to_red(self, array):
 		return array - self.to_blue(array) - self.to_green(array)
 
-	def celluloid(self, array, tresh=4):
+	def to_celluloid(self, array, tresh=4):
 		new = np.array(array)
 		hold = np.linspace(0.0, 1.0, num=tresh, endpoint=False)[::-1]
 		for i in hold:
