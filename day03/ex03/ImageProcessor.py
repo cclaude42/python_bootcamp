@@ -10,7 +10,7 @@ class ImageProcessor():
             img = Image.open(path)
             arr = np.array(img)
             print(f"Loading image of dimensions {arr.shape[0]} x {arr.shape[1]}")
-            return np.divide(arr, 255)
+            return np.divide(arr[:,:,0:3], 255)
         except Exception as e:
             print(f"Exception : {e.__class__.__name__} -- strerror: {e}")
         return None
